@@ -1,14 +1,15 @@
+import os
 import fire
 from checol.vcs import Git
 from checol.gpt import Claude
-
-API_KEY = "API_KEY"
 
 
 def review(branch_name: str, git_path: str = "."):
     print("CTRL+C or 'exit' to exit.")
     git = Git(git_path)
-    claude = Claude(API_KEY)
+    claude = Claude(
+      api_key=os.environ.get("ANTHROPIC_API_KEY")
+    )
     diff = git.diff(branch_name)
     message = claude.send(diff)
     while True:
@@ -17,12 +18,13 @@ def review(branch_name: str, git_path: str = "."):
             print(line)
         print('You > ', end='')
         user_message = input()
-        if user_message == 'exit':
-            break
         message = claude.send(user_message)
 
 
 def main():
+    if os.environ.get("ANTHROPIC_API_KEY") is None:
+        print("Please set ANTHROPIC_API_KEY environment variable.")
+        return
     fire.Fire({'review': review})
 
 

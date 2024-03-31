@@ -23,6 +23,5 @@ class Claude:
             system=self.system,
             messages=self.messages,
         )
-        print(f"Anthropic: {result.content}")
         self.messages.append({'role': result.role, 'content': result.content[0].text})
         return result
