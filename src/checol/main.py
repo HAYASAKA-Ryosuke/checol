@@ -14,7 +14,12 @@ def review(git_path: str = ".", diff_or_branch_name: str = "diff"):
         diff = git.head_diff()
     else:
         diff = git.diff(diff_or_branch_name)
-    message = claude.send(diff)
+    print('Description > ', end='')
+    description = input()
+    if description:
+        message = claude.send(f'{description}\n\n{diff}')
+    else:
+        message = claude.send(diff)
     while True:
         print('AI > ', end='')
         for line in message.content[0].text.split("\n"):
