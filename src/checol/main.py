@@ -4,8 +4,8 @@ from checol.vcs import Git
 from checol.gpt import Claude
 
 
-def review(diff_or_branch_name: str, git_path: str = "."):
-    print("CTRL+C or 'exit' to exit.")
+def review(git_path: str = ".", diff_or_branch_name: str = "diff"):
+    print("CTRL+C to exit.")
     git = Git(git_path)
     claude = Claude(
       api_key=os.environ.get("ANTHROPIC_API_KEY")
