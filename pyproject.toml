@@ -26,3 +26,9 @@ allow-direct-references = true
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/checol"]
+
+[tool.hatch.envs.default.scripts]
+checol = "main.py"
+
+[project.scripts]
+checol = 'checol.main:main'
