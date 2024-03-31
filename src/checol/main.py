@@ -4,13 +4,16 @@ from checol.vcs import Git
 from checol.gpt import Claude
 
 
-def review(branch_name: str, git_path: str = "."):
+def review(diff_or_branch_name: str, git_path: str = "."):
     print("CTRL+C or 'exit' to exit.")
     git = Git(git_path)
     claude = Claude(
       api_key=os.environ.get("ANTHROPIC_API_KEY")
     )
-    diff = git.diff(branch_name)
+    if diff_or_branch_name == "diff":
+        diff = git.head_diff()
+    else:
+        diff = git.diff(diff_or_branch_name)
     message = claude.send(diff)
     while True:
         print('AI > ', end='')
