@@ -32,7 +32,7 @@ def generate_response_from_claude(git_diff: str):
         user_message = input()
         spinner.start()
         message = claude.send(user_message)
-        spinner.end()
+        spinner.stop()
 
 
 def uncommitted(staged: bool = False):
