@@ -66,6 +66,7 @@ def main():
         print("Please set ANTHROPIC_API_KEY environment variable.")
         return
     print("CTRL+C to exit.")
+    print("To confirm, type Enter with an empty space.")
     fire.Fire({"uncommitted": uncommitted, "diff": diff})
 
 
