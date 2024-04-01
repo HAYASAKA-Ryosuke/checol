@@ -1,4 +1,6 @@
 import os
+from typing import Optional
+
 import fire
 from checol.vcs import Git
 from checol.gpt import Claude
@@ -28,7 +30,7 @@ def uncommitted(staged: bool = False):
     interact_with_claude(uncommitted_diff)
 
 
-def diff(branch: str = None):
+def diff(branch: Optional[str] = None):
     git_path = os.getcwd()
     git = Git(git_path)
     diff = git.diff(branch)
