@@ -10,9 +10,13 @@ from checol.gpt import Claude
 spinner = Halo(text="Loading", spinner="dots")
 
 
-def interact_with_claude(git_diff: str):
+def generate_response_from_claude(git_diff: str):
     print("Description > ", end="")
-    claude = Claude(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+    model = "claude-3-haiku-20240307"
+    if os.environ.get("ANTHROPIC_API_MODEL") is not None:
+        model = os.environ.get("ANTHROPIC_API_MODEL")
+
+    claude = Claude(api_key=os.environ.get("ANTHROPIC_API_KEY"), model=model)
     description = input()
     spinner.start()
     if description:
@@ -35,14 +39,14 @@ def uncommitted(staged: bool = False):
     git_path = os.getcwd()
     git = Git(git_path)
     uncommitted_diff = git.head_diff(staged=staged)
-    interact_with_claude(uncommitted_diff)
+    generate_response_from_claude(uncommitted_diff)
 
 
 def diff(branch: Optional[str] = None):
     git_path = os.getcwd()
     git = Git(git_path)
     diff = git.diff(branch)
-    interact_with_claude(diff)
+    generate_response_from_claude(diff)
 
 
 def main():
