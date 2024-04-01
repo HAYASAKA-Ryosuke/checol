@@ -2,25 +2,32 @@ import os
 from typing import Optional
 
 import fire
+from halo import Halo
+
 from checol.vcs import Git
 from checol.gpt import Claude
 
+spinner = Halo(text='Loading', spinner='dots')
 
 def interact_with_claude(git_diff: str):
     print("Description > ", end="")
     claude = Claude(api_key=os.environ.get("ANTHROPIC_API_KEY"))
     description = input()
+    spinner.start()
     if description:
         message = claude.send(f"{description}\n\n{git_diff}")
     else:
         message = claude.send(git_diff)
+    spinner.stop()
     while True:
         print("AI > ", end="")
         for line in message.content[0].text.split("\n"):
             print(line)
         print("You > ", end="")
         user_message = input()
+        spinner.start()
         message = claude.send(user_message)
+        spinner.end()
 
 
 def uncommitted(staged: bool = False):

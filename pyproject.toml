@@ -9,6 +9,7 @@ dependencies = [
     "gitpython>=3.1.42",
     "fire>=0.6.0",
     "anthropic>=0.21.3",
+    "halo>=0.0.31",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"
