@@ -23,5 +23,6 @@ class Claude:
             system=self.system,
             messages=self.messages,
         )
-        self.messages.append({"role": result.role, "content": result.content[0].text})
+        content = result.content[0].text
+        self.messages.append({"role": result.role, "content": content})
         return result
