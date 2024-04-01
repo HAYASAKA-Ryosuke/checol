@@ -10,7 +10,10 @@ from checol.gpt import Claude
 spinner = Halo(text="Loading", spinner="dots")
 
 
-def user_input():
+def get_user_input() -> str:
+    """
+    Read user input until empty line.
+    """
     result = ''
     while True:
         line = input()
@@ -20,28 +23,25 @@ def user_input():
     return result
 
 
-def generate_response_from_claude(git_diff: str):
+def generate_response_from_claude(git_diff: str) -> None:
     print("Description > ")
-    model = "claude-3-haiku-20240307"
-    if os.environ.get("ANTHROPIC_API_MODEL") is not None:
-        model = os.environ.get("ANTHROPIC_API_MODEL")
-
+    model = os.environ.get("ANTHROPIC_API_MODEL", "claude-3-haiku-20240307")
     claude = Claude(api_key=os.environ.get("ANTHROPIC_API_KEY"), model=model)
 
-    description = user_input()
+    description = get_user_input()
+
+    sending_message = f"{description}\n\n{git_diff}" if description else git_diff
 
     spinner.start()
-    if description:
-        message = claude.send(f"{description}\n\n{git_diff}")
-    else:
-        message = claude.send(git_diff)
+    message = claude.send(sending_message)
     spinner.stop()
+
     while True:
         print("AI > ", end="")
         for line in message.content[0].text.split("\n"):
             print(line)
         print("You > ", end="")
-        user_message = user_input()
+        user_message = get_user_input()
         spinner.start()
         message = claude.send(user_message)
         spinner.stop()
