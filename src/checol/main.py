@@ -14,7 +14,7 @@ def get_user_input() -> str:
     """
     Read user input until empty line.
     """
-    result = ''
+    result = ""
     while True:
         line = input()
         if line == "":

@@ -9,11 +9,13 @@ class Git:
 
     def head_diff(self, staged: bool = False):
         if staged:
-            return self.repo.git.diff("HEAD", "--staged", '-U10000')
+            return self.repo.git.diff("HEAD", "--staged", "-U10000")
         else:
-            return self.repo.git.diff("HEAD", '-U10000')
+            return self.repo.git.diff("HEAD", "-U10000")
 
-    def diff(self, branch_name: Optional[str] = None, base_branch: Optional[str] = None):
+    def diff(
+        self, branch_name: Optional[str] = None, base_branch: Optional[str] = None
+    ):
         if base_branch is None:
             base_branch = self.repo.active_branch.name
-        return self.repo.git.diff(branch_name, base_branch, '-U10000')
+        return self.repo.git.diff(branch_name, base_branch, "-U10000")
