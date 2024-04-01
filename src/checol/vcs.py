@@ -8,13 +8,12 @@ class Git:
         self.repo = git.Repo(repo_path)
 
     def head_diff(self, staged: bool = False):
-        import pdb;pdb.set_trace()
         if staged:
-            return self.repo.git.diff("HEAD", "--staged", '-W')
+            return self.repo.git.diff("HEAD", "--staged", '-U10000')
         else:
-            return self.repo.git.diff("HEAD", '-W')
+            return self.repo.git.diff("HEAD", '-U10000')
 
     def diff(self, branch_name: str, current_branch: Optional[str] = None):
         if current_branch is None:
             current_branch = self.repo.active_branch.name
-        return self.repo.git.diff(branch_name, current_branch, '-W')
+        return self.repo.git.diff(branch_name, current_branch, '-U10000')
