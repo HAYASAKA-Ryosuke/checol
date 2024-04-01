@@ -13,7 +13,7 @@ class Git:
         else:
             return self.repo.git.diff("HEAD", '-U10000')
 
-    def diff(self, branch_name: str, current_branch: Optional[str] = None):
+    def diff(self, branch_name: Optional[str] = None, current_branch: Optional[str] = None):
         if current_branch is None:
             current_branch = self.repo.active_branch.name
         return self.repo.git.diff(branch_name, current_branch, '-U10000')
