@@ -7,7 +7,8 @@ from halo import Halo
 from checol.vcs import Git
 from checol.gpt import Claude
 
-spinner = Halo(text='Loading', spinner='dots')
+spinner = Halo(text="Loading", spinner="dots")
+
 
 def interact_with_claude(git_diff: str):
     print("Description > ", end="")
