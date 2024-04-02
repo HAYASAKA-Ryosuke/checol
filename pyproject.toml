@@ -43,6 +43,7 @@ lint = { chain = ["lint:ruff"] }
 
 [tool.ruff.lint]
 select = [
+  "F",
   "I",
   "E",
   "W",
