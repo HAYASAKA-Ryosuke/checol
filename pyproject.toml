@@ -37,10 +37,6 @@ checol = "main.py"
 [project.scripts]
 checol = 'checol.main:main'
 
-[tool.rye.scripts]
-lint = { chain = ["lint:ruff"] }
-"lint:ruff" = "rye lint --check . --fix"
-
 [tool.ruff.lint]
 select = [
   "F",
@@ -48,3 +44,6 @@ select = [
   "E",
   "W",
 ]
+
+[tool.ruff.format]
+indent-style = "space"
