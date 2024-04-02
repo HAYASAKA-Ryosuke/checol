@@ -3,32 +3,19 @@ from typing import Optional
 
 import fire
 from halo import Halo
+from prompt_toolkit import prompt
 
-from checol.vcs import Git
 from checol.gpt import Claude
+from checol.vcs import Git
 
 spinner = Halo(text="Loading", spinner="dots")
 
 
-def get_user_input() -> str:
-    """
-    Read user input until empty line.
-    """
-    result = ""
-    while True:
-        line = input()
-        if line == "":
-            break
-        result += f"{line}\n"
-    return result
-
-
 def generate_response_from_claude(git_diff: str) -> None:
-    print("Description > ")
     model = os.environ.get("ANTHROPIC_API_MODEL", "claude-3-haiku-20240307")
     claude = Claude(api_key=os.environ.get("ANTHROPIC_API_KEY"), model=model)
 
-    description = get_user_input()
+    description = prompt("Description > ", multiline=True)
 
     sending_message = f"{description}\n\n{git_diff}" if description else git_diff
 
@@ -40,8 +27,7 @@ def generate_response_from_claude(git_diff: str) -> None:
         print("AI > ", end="")
         for line in message.content[0].text.split("\n"):
             print(line)
-        print("You > ", end="")
-        user_message = get_user_input()
+        user_message = prompt("You > ", multiline=True)
         spinner.start()
         message = claude.send(user_message)
         spinner.stop()
