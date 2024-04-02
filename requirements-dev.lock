@@ -64,7 +64,6 @@ pyyaml==6.0.1
     # via huggingface-hub
 requests==2.31.0
     # via huggingface-hub
-ruff==0.3.5
 six==1.16.0
     # via fire
     # via halo
