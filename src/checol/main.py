@@ -11,19 +11,6 @@ from checol.vcs import Git
 spinner = Halo(text="Loading", spinner="dots")
 
 
-def get_user_input() -> str:
-    """
-    Read user input until empty line.
-    """
-    result = ""
-    while True:
-        line = input()
-        if line == "":
-            break
-        result += f"{line}\n"
-    return result
-
-
 def generate_response_from_claude(git_diff: str) -> None:
     model = os.environ.get("ANTHROPIC_API_MODEL", "claude-3-haiku-20240307")
     claude = Claude(api_key=os.environ.get("ANTHROPIC_API_KEY"), model=model)
