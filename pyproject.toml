@@ -39,7 +39,7 @@ checol = 'checol.main:main'
 
 [tool.rye.scripts]
 lint = { chain = ["lint:ruff" ] }
-"lint:ruff" = "ruff check --select I001 --fix"
+"lint:ruff" = "ruff check . --fix"
 
 [tool.ruff.lint]
 select = ["I001"]
