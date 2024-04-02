@@ -38,8 +38,5 @@ checol = "main.py"
 checol = 'checol.main:main'
 
 [tool.rye.scripts]
-lint = { chain = ["lint:ruff" ] }
-"lint:ruff" = "ruff check . --fix"
-
-[tool.ruff.lint]
-select = ["I001"]
+lint = { chain = ["lint:ruff"] }
+"lint:ruff" = "ruff format ."
