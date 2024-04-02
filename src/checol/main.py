@@ -1,5 +1,4 @@
 import os
-from typing import Optional
 
 import fire
 from halo import Halo
@@ -33,11 +32,11 @@ def generate_response_from_claude(git_diff: str) -> None:
         spinner.stop()
 
 
-def diff(spec: str = '', cached=False):
+def diff(spec: str = "", cached=False):
     git_path = os.getcwd()
     git = Git(git_path)
     if cached:
-        spec = f'{spec} --cached'
+        spec = f"{spec} --cached"
     diff = git.diff(spec)
     generate_response_from_claude(diff)
 
