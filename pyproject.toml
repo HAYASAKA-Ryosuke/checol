@@ -21,7 +21,9 @@ build-backend = "hatchling.build"
 
 [tool.rye]
 managed = true
-dev-dependencies = []
+dev-dependencies = [
+    "ruff>=0.3.5",
+]
 
 [tool.hatch.metadata]
 allow-direct-references = true
@@ -34,3 +36,10 @@ checol = "main.py"
 
 [project.scripts]
 checol = 'checol.main:main'
+
+[tool.rye.scripts]
+lint = { chain = ["lint:ruff" ] }
+"lint:ruff" = "ruff check --select I001 --fix"
+
+[tool.ruff.lint]
+select = ["I001"]

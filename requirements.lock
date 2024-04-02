@@ -54,6 +54,8 @@ log-symbols==0.0.14
     # via halo
 packaging==24.0
     # via huggingface-hub
+prompt-toolkit==3.0.43
+    # via checol
 pydantic==2.6.4
     # via anthropic
 pydantic-core==2.16.3
@@ -87,3 +89,5 @@ typing-extensions==4.10.0
     # via pydantic-core
 urllib3==2.2.1
     # via requests
+wcwidth==0.2.13
+    # via prompt-toolkit
