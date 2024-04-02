@@ -43,6 +43,3 @@ select = [
   "E",
   "W",
 ]
-
-[tool.ruff.format]
-indent-style = "space"
