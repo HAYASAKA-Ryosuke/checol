@@ -1,4 +1,3 @@
-
 import git
 
 
@@ -7,4 +6,6 @@ class Git:
         self.repo = git.Repo(repo_path)
 
     def diff(self, spec: str):
-        return self.repo.git.diff(*spec.strip().split(" "), "-U10000")
+        if spec:
+            return self.repo.git.diff(*spec.strip().split(" "), "-U10000")
+        return self.repo.git.diff("-U10000")
