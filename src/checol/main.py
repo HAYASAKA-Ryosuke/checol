@@ -33,17 +33,12 @@ def generate_response_from_claude(git_diff: str) -> None:
         spinner.stop()
 
 
-def uncommitted(staged: bool = False):
+def diff(spec: str = '', cached=False):
     git_path = os.getcwd()
     git = Git(git_path)
-    uncommitted_diff = git.head_diff(staged=staged)
-    generate_response_from_claude(uncommitted_diff)
-
-
-def diff(branch: Optional[str] = None):
-    git_path = os.getcwd()
-    git = Git(git_path)
-    diff = git.diff(branch)
+    if cached:
+        spec = f'{spec} --cached'
+    diff = git.diff(spec)
     generate_response_from_claude(diff)
 
 
@@ -53,7 +48,7 @@ def main():
         return
     print("CTRL+C to exit.")
     print("To confirm, type Enter with an empty space.")
-    fire.Fire({"uncommitted": uncommitted, "diff": diff})
+    fire.Fire({"diff": diff})
 
 
 if __name__ == "__main__":
