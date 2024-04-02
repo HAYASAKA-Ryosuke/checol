@@ -36,6 +36,11 @@ checol = "main.py"
 [project.scripts]
 checol = 'checol.main:main'
 
+[tool.rye.scripts]
+format = { chain = ["rye:lintFix", "rye:fmt"] }
+"rye:lintFix" = "rye lint . --fix"
+"rye:fmt" = "rye fmt ."
+
 [tool.ruff.lint]
 select = [
   "F",
