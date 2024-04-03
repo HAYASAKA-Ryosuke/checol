@@ -1,7 +1,7 @@
 [project]
 name = "checol"
-version = "0.1.0"
-description = "Add your description here"
+version = "0.2.2"
+description = "A CLI tool leveraging AI to analyze and explain Git diffs."
 authors = [
     { name = "HAYASAKA Ryosuke", email = "hayasaka.ryosuke@gmail.com" }
 ]

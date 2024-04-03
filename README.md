@@ -5,7 +5,7 @@ This tool is designed to analyze Git repository diffs and generate related text 
 ## Prerequisites
 
 - Python 3.8 or higher
-- Access to a Git repository
+- Access to a Git local repository
 
 ## Installation
 
@@ -32,7 +32,7 @@ pip install checol
 1. Use the `diff` command to analyze Git diffs and start interacting with Claude.
 
     ```
-    checol diff [file name or options]
+    checol diff [git diff options]
     ```
 
 2. Follow the prompts to input your description or questions regarding the Git diffs.
