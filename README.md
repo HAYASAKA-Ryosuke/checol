@@ -1,11 +1,12 @@
 # Checol
 
-This tool is designed to analyze Git repository diffs and generate related text responses using the AI model. It enables you to get detailed explanations or clarifications on Git changes from AI.
+This tool is designed to analyze Git repository diffs and Prisma schema files, and generate related text responses using the AI model. It enables you to get detailed explanations, clarifications, or SQL code based on Git changes or Prisma schema files from the AI.
 
 ## Prerequisites
 
 - Python 3.8 or higher
 - Access to a Git local repository
+- Prisma schema file
 
 ## Installation
 
@@ -29,6 +30,8 @@ pip install checol
 
 ## Usage
 
+### Analyzing Git diffs
+
 1. Use the `diff` command to analyze Git diffs and start interacting with Claude.
 
     ```
@@ -39,6 +42,14 @@ pip install checol
 
 3. Review the response from Claude and continue the interaction as desired.
 
-## License
+### Generating SQL from Prisma schema
 
-This project is released under the [MIT License](LICENSE)
+1. Use the `prismaQuery` command to generate SQL from a Prisma schema file.
+
+    ```
+    checol prismaQuery path/to/your/schema.prisma
+    ```
+
+2. Follow the prompts to provide any additional context or instructions to the AI.
+
+3. Review the generated SQL response from Claude and continue the interaction as needed.
