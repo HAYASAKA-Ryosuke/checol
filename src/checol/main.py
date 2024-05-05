@@ -12,7 +12,9 @@ spinner = Halo(text="Loading", spinner="dots")
 
 def generate_response_from_claude(system_message: str, file_text: str) -> None:
     model = os.environ.get("ANTHROPIC_API_MODEL", "claude-3-haiku-20240307")
-    claude = Claude(api_key=os.environ.get("ANTHROPIC_API_KEY"), model=model, system=system_message)
+    claude = Claude(
+        api_key=os.environ.get("ANTHROPIC_API_KEY"), model=model, system=system_message
+    )
 
     description = prompt("Description > ", multiline=True)
 
@@ -38,13 +40,17 @@ def diff(spec: str = "", cached=False):
     if cached:
         spec = f"{spec} --cached"
     diff = git.diff(spec)
-    generate_response_from_claude("このコード差分を見てプロの目線でコードレビューしてください", diff)
+    generate_response_from_claude(
+        "このコード差分を見てプロの目線でコードレビューしてください", diff
+    )
 
 
 def prismaQuery(prisma_schema_file_path: str = ""):
     with open(prisma_schema_file_path) as f:
         prisma_schema = f.read()
-    generate_response_from_claude("Prsimaのスキーマファイルです｡要望に応じてSQLを書いてください", prisma_schema)
+    generate_response_from_claude(
+        "Prsimaのスキーマファイルです｡要望に応じてSQLを書いてください", prisma_schema
+    )
 
 
 def main():
