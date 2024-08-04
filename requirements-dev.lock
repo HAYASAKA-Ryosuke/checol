@@ -68,6 +68,8 @@ pydantic==2.6.4
     # via openai
 pydantic-core==2.16.3
     # via pydantic
+python-dotenv==1.0.1
+    # via checol
 pyyaml==6.0.1
     # via huggingface-hub
 requests==2.31.0

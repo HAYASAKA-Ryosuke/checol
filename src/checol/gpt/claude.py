@@ -26,4 +26,4 @@ class Claude(BaseModel):
         )
         content = result.content[0].text
         self.messages.append({"role": result.role, "content": content})
-        return result
+        return content

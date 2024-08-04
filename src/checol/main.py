@@ -1,14 +1,18 @@
 import os
+from os.path import join, dirname
 
 import fire
 from halo import Halo
 from prompt_toolkit import prompt
+from dotenv import load_dotenv
 
 from checol.gpt.claude import Claude
 from checol.gpt.chat_gpt import ChatGPT
 from checol.vcs import Git
 
 spinner = Halo(text="Loading", spinner="dots")
+dotenv_path = join(dirname(__name__), '.env')
+load_dotenv(verbose=True, dotenv_path=dotenv_path)
 
 
 def generate_response(system_message: str, file_text: str) -> None:
@@ -19,7 +23,7 @@ def generate_response(system_message: str, file_text: str) -> None:
             model = ChatGPT(
                 api_key=api_key, model=model_name, system=system_message
             )
-        case "gpt-4o-mini":
+        case "claude-3-haiku-20240307":
             model = Claude(
                 api_key=api_key, model=model_name, system=system_message
             )
@@ -35,7 +39,7 @@ def generate_response(system_message: str, file_text: str) -> None:
 
     while True:
         print("AI > ", end="")
-        for line in message.content[0].text.split("\n"):
+        for line in message.split("\n"):
             print(line)
         user_message = prompt("You > ", multiline=True)
         spinner.start()
