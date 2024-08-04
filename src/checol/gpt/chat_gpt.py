@@ -1,28 +1,30 @@
-import anthropic
+import openai
+from .base_model import BaseModel
 
 
-class Claude:
+class ChatGPT(BaseModel):
     def __init__(
         self,
         api_key,
-        model="claude-3-haiku-20240307",
+        model="gpt-4o-mini",
         max_tokens=1000,
         system="このコード差分を見てプロの目線でコードレビューしてください",
     ):
-        self.client = anthropic.Client(api_key=api_key)
         self.model = model
         self.max_tokens = max_tokens
         self.system = system
-        self.messages = []
+        self.messages = [{role: "system", content: system}]
+        self.client = openai.ChatCompletion.create(
+        )
 
     def send(self, message):
         self.messages.append({"role": "user", "content": message})
-        result = self.client.messages.create(
+        result = openai.ChatCompletion.create(
             model=self.model,
             max_tokens=self.max_tokens,
             system=self.system,
-            messages=self.messages,
+            messages=self.messages
         )
-        content = result.content[0].text
+        content = result['choices'][0]["message"]["content"]
         self.messages.append({"role": result.role, "content": content})
         return result

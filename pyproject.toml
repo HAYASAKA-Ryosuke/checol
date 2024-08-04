@@ -1,7 +1,7 @@
 [project]
 name = "checol"
 version = "0.3.0"
-description = "A CLI tool leveraging AI to analyze and explain Git diffs."
+description = ""
 authors = [
     { name = "HAYASAKA Ryosuke", email = "hayasaka.ryosuke@gmail.com" }
 ]
@@ -11,6 +11,7 @@ dependencies = [
     "anthropic>=0.21.3",
     "halo>=0.0.31",
     "prompt-toolkit>=3.0.43",
+    "openai>=1.38.0",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"
